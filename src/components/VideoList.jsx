@@ -2,11 +2,19 @@ import exampleVideoData from '../data/exampleVideoData.js';
 
 var VideoList = () => (
   <div className = "video-list">
-    <VideoResults video = {exampleVideoData}/>
+    <VideoResults videos = {exampleVideoData}/>
   </div>
 );
 
-class VideoListItems extends React.Components {
+var VideoResults = (props) => (
+  <div className ="video-list">
+    {props.videos.map(video =>
+      <VideoListItems video={video} />
+    )}
+  </div>
+);
+
+class VideoListItems extends React.Component {
 
   constructor(props) {
     super(props);
@@ -17,25 +25,10 @@ class VideoListItems extends React.Components {
       <div>
         <img src={this.props.video.snippet.thumbnails.default.url}/>
         <div>{this.props.video.snippet.title}</div>
-        <div>{this.props.video.snippet.description}</div>
       </div>
     );
   }
 }
-
-
-
-
-
-var VideoResults = (props) => (
-  <div class ="video">
-    <div>
-      {props.videos.map(video =>
-        <VideoListItems video={video} />
-      )}
-    </div>
-  </div>
-);
 
 // PropTypes tell other developers what `props` a component expects
 // Warnings will be shown in the console when the defined rules are violated
